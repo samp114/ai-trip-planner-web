@@ -1,11 +1,11 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ FIXED
+import { useNavigate } from "react-router-dom";
 import { db } from "../service/firebaseConfig";
 import UserTripCardItem from "./components/UserTripCardItem";
 
 function MyTrips() {
-  const navigate = useNavigate(); // ✅ FIXED
+  const navigate = useNavigate();
   const [userTrips, setUserTrips] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function MyTrips() {
   const GetUserTrips = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
-      navigate("/"); // ✅ FIXED
+      navigate("/");
       return;
     }
 
@@ -26,10 +26,11 @@ function MyTrips() {
       );
       const querySnapshot = await getDocs(q);
 
-      const trips = [];
-      querySnapshot.forEach((doc) => {
-        trips.push(doc.data());
-      });
+      const trips = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
       setUserTrips(trips);
     } catch (error) {
       console.error("Error fetching user trips:", error);
@@ -44,8 +45,8 @@ function MyTrips() {
         <p className="mt-10 text-gray-500">No trips found.</p>
       ) : (
         <div className="grid grid-cols-2 mt-10 md:grid-cols-3 gap-5">
-          {userTrips.map((trip, index) => (
-            <UserTripCardItem key={index} trip={trip} /> // ✅ Add `key`
+          {userTrips.map((trip) => (
+            <UserTripCardItem key={trip.id} trip={trip} />
           ))}
         </div>
       )}

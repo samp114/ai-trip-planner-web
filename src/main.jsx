@@ -8,7 +8,8 @@ import Header from './components/custom/Header'
 import { Toaster } from 'sonner'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import Viewtrip from "./view-trip/[tripId]/index.jsx";
-import MyTrips from "./My-Trips/index.jsx";
+import MyTrips from "./my-trips/index.jsx"; // ✅
+
 // import Footer from "./view-trip/components/Footer.jsx";
 
 
