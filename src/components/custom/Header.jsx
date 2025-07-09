@@ -54,7 +54,7 @@ function Header() {
       <img src="/logo.svg" alt="" />
       <div>
       {user ? (
-        <div className="flex gap-5 items-center bg-black">
+        <div className="flex gap-5 items-center ">
           <a href='/Create-trip'>
           <Button variant="outline" className="rounded-full">
             +Create-Trip
